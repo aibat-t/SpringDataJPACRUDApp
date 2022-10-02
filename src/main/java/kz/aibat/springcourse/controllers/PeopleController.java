@@ -1,5 +1,6 @@
 package kz.aibat.springcourse.controllers;
 
+import kz.aibat.springcourse.dao.PersonDAO;
 import kz.aibat.springcourse.models.Person;
 import kz.aibat.springcourse.services.ItemService;
 import kz.aibat.springcourse.services.PeopleService;
@@ -16,17 +17,18 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PeopleService peopleService;
-    private final ItemService itemService;
+    //private final PersonDAO personDAO;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, ItemService itemService) {
+    public PeopleController(PeopleService peopleService, PersonDAO personDAO) {
         this.peopleService = peopleService;
-        this.itemService = itemService;
+        //this.personDAO = personDAO;
     }
 
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
+        //personDAO.testNplus1();
 
         return "people/index";
     }
